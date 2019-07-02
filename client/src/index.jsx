@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ScoreBoard from './components/ScoreBoard.jsx';
+import Keypad from './components/Keypad.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,29 +14,20 @@ class App extends React.Component {
       round: 1,
       frameScore: [],
       throw: 0,
-      frameScores: [[], [], [], [], [], [], [], [], [], []],
-      final: false,
-      // eslint-disable-next-line comma-dangle
-      keys: [[1, 2, 3], [4, 5, 6], [7, 8, 9], [0, 0, 10]]
+      frameScores: [],
+      final: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(selectedNumber) {
-    // eslint-disable-next-line no-console
-    console.log(selectedNumber);
     if (this.state.currentPins > selectedNumber) {
       let newScore = this.state.frameScore;
       newScore.push(selectedNumber);
       let newRound = this.state.round + 1;
       let newPin = this.state.currentPins - selectedNumber;
       let newThrow = this.state.throw + 1;
-      let newTotal = this.state.score + selectedNumber;
-      let newFrameScores = this.state.frameScores.slice(
-        this.state.round,
-        1,
-        newScore
-      );
+      let newTotal = this.state.score + Number(selectedNumber);
       this.setState(
         {
           selected: selectedNumber,
@@ -48,17 +41,19 @@ class App extends React.Component {
           console.log(this.state);
         }
       );
-
-      //when is was the 2nd throw of current round, increase round and reset other values
+      //when it is the 2nd throw of current round, increase round and reset other values
       if (newThrow === 2) {
         //reset state if it is not the last round
+
         if (this.state.round < 10) {
+          let newFrameScores = [...this.state.frameScores, newScore];
           this.setState({
             throw: 0,
             round: newRound,
             frameScore: [],
             currentPins: 10,
-            selected: null
+            selected: null,
+            frameScores: newFrameScores
           });
         } else {
           //display final scores
@@ -68,39 +63,54 @@ class App extends React.Component {
         }
       }
     }
+    // if (selectedNumber - this.state.currentPins >= 0) {
+    //   setSelected(selectedNumber);
+    // }
   }
+
+  // setSelected(number) {
+  //   this.setState({
+  //     selected: number
+  //   });
+  //   this.setRoundAndThrow();
+  //   this.setPins();
+  // }
+
+  // setRoundAndThrow() {
+  //   if (this.state.round === 2) {
+  //     this.setState({
+  //       round: 0,
+  //       throw: 0
+  //     });
+  //   } else {
+  //     this.setState({
+  //       round: this.state.round++,
+  //       throw: this.state.round++
+  //     });
+  //   }
+  // }
+
+  // setPins() {
+  //   const pins = this.states.currentPins;
+  //   this.setState({
+  //     currentPins: pins - this.state.selected
+  //   });
+
+  //   this.setScore();
+  // }
+
+  // setScore() {
+  //   this.setState({
+  //     score: (this.state.score += this.state.selected)
+  //   });
+  // }
 
   render() {
     return (
-      <div>
-        <p>This is rendering from react</p>
-        <div>
-          {this.state.keys.map((value, index) => {
-            return (
-              <div key={index}>
-                <button
-                  value={value[0]}
-                  onClick={e => this.handleClick(e.target.value)}
-                >
-                  {value[0]}
-                </button>
-                <button
-                  value={value[1]}
-                  onClick={e => this.handleClick(e.target.value)}
-                >
-                  {value[1]}
-                </button>
-                <button
-                  value={value[2]}
-                  onClick={e => this.handleClick(e.target.value)}
-                >
-                  {value[2]}
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <>
+        <ScoreBoard scores={this.state.frameScores} />
+        <Keypad handleClick={this.handleClick} />
+      </>
     );
   }
 }
