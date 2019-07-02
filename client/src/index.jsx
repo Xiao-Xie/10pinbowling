@@ -5,7 +5,27 @@ import ReactDOM from 'react-dom';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      score: 0,
+      currentPins: 10,
+      selected: null,
+      round: 1,
+      frameScore: 0,
+      throw: 1,
+      frameScores: []
+    };
+  }
+
+  addThrow() {
+    this.setState({
+      throw: this.state.throw + 1
+    });
+  }
+
+  setSelected(e) {
+    this.setState({
+      selected: e.target.value
+    });
   }
 
   render() {
