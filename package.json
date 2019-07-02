@@ -1,0 +1,27 @@
+{
+  "name": "10pinbowling",
+  "version": "1.0.0",
+  "description": "10 Pin Bowling",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sokushinbutsu/10pinbowling.git"
+  },
+  "keywords": [
+    "Bowling"
+  ],
+  "author": "Brian and Xiao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sokushinbutsu/10pinbowling/issues"
+  },
+  "homepage": "https://github.com/Sokushinbutsu/10pinbowling#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  }
+}
