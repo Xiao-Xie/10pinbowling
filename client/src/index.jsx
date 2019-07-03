@@ -26,6 +26,7 @@ class App extends React.Component {
         round9: [0, 0],
         round10: [0, 0]
       },
+      roundholder: ['round1', 'round2', 'round3', 'round4', 'round5', 'round6', 'round7', 'round8', 'round9', 'round10'],
       final: false
     };
     this.handleClick = this.handleClick.bind(this);
@@ -69,7 +70,7 @@ class App extends React.Component {
 
   setRoundAndThrow() {
     //after 2nd throw or if we hit all on 1st throw, move to next round
-    if (this.state.throw === 2 || (this.state.throw === 1 && this.state.selected === 10)) {
+    if (this.state.throw === 2 || (this.state.throw === 1 && this.state.selected === '10')) {
       this.setState({
         round: this.state.round + 1,
         throw: 1,
@@ -98,6 +99,7 @@ class App extends React.Component {
   render() {
     return (
       <>
+
         {/* <ScoreBoard scores={this.state.frameScores} /> */}
         <Keypad handleClick={this.handleClick} />
       </>
