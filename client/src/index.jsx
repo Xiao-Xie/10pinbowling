@@ -12,103 +12,71 @@ class App extends React.Component {
       currentPins: 10,
       selected: 0,
       round: 1,
-      frameScore: [],
       throw: 0,
-      frameScores: [],
+      //frameScore: { 1: 0, 2: '' },
+      frameScores: [{ 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }],
       final: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(selectedNumber) {
-    if (this.state.currentPins > selectedNumber) {
-      let newScore = this.state.frameScore;
-      newScore.push(selectedNumber);
-      let newRound = this.state.round + 1;
-      let newPin = this.state.currentPins - selectedNumber;
-      let newThrow = this.state.throw + 1;
-      let newTotal = this.state.score + Number(selectedNumber);
-      this.setState(
-        {
-          selected: selectedNumber,
-          currentPins: newPin,
-          frameScore: newScore,
-          throw: newThrow,
-          score: newTotal,
-          frameScores: newFrameScores
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
-      //when it is the 2nd throw of current round, increase round and reset other values
-      if (newThrow === 2) {
-        //reset state if it is not the last round
-
-        if (this.state.round < 10) {
-          let newFrameScores = [...this.state.frameScores, newScore];
-          this.setState({
-            throw: 0,
-            round: newRound,
-            frameScore: [],
-            currentPins: 10,
-            selected: null,
-            frameScores: newFrameScores
-          });
-        } else {
-          //display final scores
-          this.setState({
-            final: true
-          });
-        }
-      }
-    }
-    // if (selectedNumber - this.state.currentPins >= 0) {
-    //   setSelected(selectedNumber);
-    // }
+    this.setSelected(selectedNumber)
   }
 
-  // setSelected(number) {
-  //   this.setState({
-  //     selected: number
-  //   });
-  //   this.setRoundAndThrow();
-  //   this.setPins();
-  // }
+  setSelected(number) {
+    if (number <= this.state.currentPins) {
+      this.setScore(number);
+      this.setState({
+        selected: number
+      }, () => {
+        this.setRoundAndThrow();
+        //this.setPins();
+      });
+    } else {
+      console.log('invalid number:', number)
+    }
+  }
 
-  // setRoundAndThrow() {
-  //   if (this.state.round === 2) {
-  //     this.setState({
-  //       round: 0,
-  //       throw: 0
-  //     });
-  //   } else {
-  //     this.setState({
-  //       round: this.state.round++,
-  //       throw: this.state.round++
-  //     });
-  //   }
-  // }
+  setRoundAndThrow() {
+    //after 2nd throw or if we hit all on 1st throw, move to next round
+    if (this.state.throw === 2 || (this.state.throw === 1 && this.state.selected === 10)) {
+      this.setState({
+        round: this.state.round++,
+        throw: 0,
+        currentPins: 10
+      });
+    } else {
+      this.setState({
+        throw: this.state.throw++
+      });
+      this.setPins()
+    }
+  }
 
-  // setPins() {
-  //   const pins = this.states.currentPins;
-  //   this.setState({
-  //     currentPins: pins - this.state.selected
-  //   });
+  setPins() {
+    const pins = this.state.currentPins;
+    if (pins - this.state.selected >= 0) {
+      this.setState({
+        currentPins: pins - this.state.selected
+      });
+    }
+  }
 
-  //   this.setScore();
-  // }
+  setScore(number) {
+    console.log(this.state.frameScores)
+    // var newScores = Object.assign(this.state.frameScores; )
 
-  // setScore() {
-  //   this.setState({
-  //     score: (this.state.score += this.state.selected)
-  //   });
-  // }
+    this.setState({
+      score: (this.state.score += Number(number)),
+      frameScores: this.state.throw === 1 ? this.state.frameScores[this.state.round - 1][0] = number : this.state.frameScores[this.state.round - 1][1] = number
+    });
+  }
 
   render() {
     return (
       <>
-        <ScoreBoard scores={this.state.frameScores} />
+        {/* <ScoreBoard scores={this.state.frameScores} /> */}
         <Keypad handleClick={this.handleClick} />
       </>
     );
