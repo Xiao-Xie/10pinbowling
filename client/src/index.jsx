@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import ScoreBoard from './components/ScoreBoard.jsx';
 import Keypad from './components/Keypad.jsx';
 import TotalScore from './components/TotalScore.jsx';
+import BowlingPins from './components/BowlingPins.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -115,9 +116,12 @@ class App extends React.Component {
   render() {
     return (
       <>
+        <BowlingPins />
         <div id="scoreBoard">
           {this.state.roundholder.map(round => {
-            return <ScoreBoard scores={this.state.frameScores[round]} key={round} />
+            return (
+              <ScoreBoard scores={this.state.frameScores[round]} key={round} />
+            );
           })}
         </div>
         <TotalScore score={this.state.score} />

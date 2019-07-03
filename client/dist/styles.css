@@ -1,0 +1,8 @@
+.icon-pin {
+  mask: url(https://image.flaticon.com/icons/svg/144/144781.svg);
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  /* background: black; */
+  mask-size: cover;
+}
