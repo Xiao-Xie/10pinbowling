@@ -12,9 +12,20 @@ class App extends React.Component {
       currentPins: 10,
       selected: 0,
       round: 1,
-      throw: 0,
-      //frameScore: { 1: 0, 2: '' },
-      frameScores: [{ 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }, { 1: 0, 2: 0 }],
+      throw: 1,
+      frameScore: [0, 0],
+      frameScores: {
+        round1: [0, 0],
+        round2: [0, 0],
+        round3: [0, 0],
+        round4: [0, 0],
+        round5: [0, 0],
+        round6: [0, 0],
+        round7: [0, 0],
+        round8: [0, 0],
+        round9: [0, 0],
+        round10: [0, 0]
+      },
       final: false
     };
     this.handleClick = this.handleClick.bind(this);
@@ -24,6 +35,25 @@ class App extends React.Component {
     this.setSelected(selectedNumber)
   }
 
+  setScore(number) {
+    console.log(this.state.throw)
+    console.log(this.state.frameScores);
+    var newframeScore = Object.assign({}, this.state.frameScore);
+    if (this.state.throw === 1) {
+      newframeScore[0] = Number(number);
+    } else {
+      newframeScore[1] = Number(number);
+    };
+    var newScore = Object.assign(this.state.frameScores);
+    var round = this.state.round;
+    newScore['round' + round] = newframeScore;
+    this.setState({
+      score: (this.state.score += Number(number)),
+      frameScores: newScore,
+      frameScore: newframeScore
+    });
+  }
+
   setSelected(number) {
     if (number <= this.state.currentPins) {
       this.setScore(number);
@@ -31,7 +61,6 @@ class App extends React.Component {
         selected: number
       }, () => {
         this.setRoundAndThrow();
-        //this.setPins();
       });
     } else {
       console.log('invalid number:', number)
@@ -42,36 +71,29 @@ class App extends React.Component {
     //after 2nd throw or if we hit all on 1st throw, move to next round
     if (this.state.throw === 2 || (this.state.throw === 1 && this.state.selected === 10)) {
       this.setState({
-        round: this.state.round++,
-        throw: 0,
-        currentPins: 10
+        round: this.state.round + 1,
+        throw: 1,
+        currentPins: 10,
+        frameScore: [0, 0]
       });
     } else {
       this.setState({
-        throw: this.state.throw++
-      });
-      this.setPins()
-    }
-  }
-
-  setPins() {
-    const pins = this.state.currentPins;
-    if (pins - this.state.selected >= 0) {
-      this.setState({
-        currentPins: pins - this.state.selected
+        throw: this.state.throw + 1,
+        currentPins: this.state.currentPins - this.state.selected
       });
     }
   }
 
-  setScore(number) {
-    console.log(this.state.frameScores)
-    // var newScores = Object.assign(this.state.frameScores; )
+  // setPins() {
+  //   const pins = this.state.currentPins;
+  //   if (pins - this.state.selected >= 0) {
+  //     this.setState({
+  //       currentPins: pins - this.state.selected
+  //     });
+  //   }
+  // }
 
-    this.setState({
-      score: (this.state.score += Number(number)),
-      frameScores: this.state.throw === 1 ? this.state.frameScores[this.state.round - 1][0] = number : this.state.frameScores[this.state.round - 1][1] = number
-    });
-  }
+
 
   render() {
     return (
