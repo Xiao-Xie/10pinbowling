@@ -6,3 +6,51 @@
   /* background: black; */
   mask-size: cover;
 }
+
+div {
+  box-sizing: border-box;
+}
+
+#scoreBoard {
+  display: block;
+  width: 1200px;
+  border: 1px solid black
+}
+
+.column {
+  display: inline-block;
+  height: 200px;
+}
+
+.scoreheader {
+  width: 10%;
+}
+
+.scores {
+  width: 90%;
+}
+
+.round {
+  width: 10%;
+  border-left: 1px solid black;
+}
+
+/* .column div {
+  vertical-align: middle;
+  text-align: center;
+  font-size: 28px
+} */
+
+.column .rowheader {
+  height: 30%;
+  border: none;
+  text-align: center;
+}
+
+.scoreheader div,
+.score {
+  height: 35%;
+  border-top: 1px solid black;
+  text-align: center;
+  font-size: 28px
+}

@@ -15,18 +15,18 @@ class App extends React.Component {
       selected: 0,
       round: 1,
       throw: 1,
-      frameScore: [0, 0],
+      frameScore: [0, 0, 0],
       frameScores: {
-        round1: [0, 0],
-        round2: [0, 0],
-        round3: [0, 0],
-        round4: [0, 0],
-        round5: [0, 0],
-        round6: [0, 0],
-        round7: [0, 0],
-        round8: [0, 0],
-        round9: [0, 0],
-        round10: [0, 0]
+        round1: [0, 0, 0],
+        round2: [0, 0, 0],
+        round3: [0, 0, 0],
+        round4: [0, 0, 0],
+        round5: [0, 0, 0],
+        round6: [0, 0, 0],
+        round7: [0, 0, 0],
+        round8: [0, 0, 0],
+        round9: [0, 0, 0],
+        round10: [0, 0, 0]
       },
       roundholder: [
         'round1',
@@ -58,6 +58,7 @@ class App extends React.Component {
     } else {
       newframeScore[1] = Number(number);
     }
+    newframeScore[2] = Number(number) + this.state.score;
     var newScore = Object.assign(this.state.frameScores);
     var round = this.state.round;
     newScore['round' + round] = newframeScore;
@@ -104,26 +105,12 @@ class App extends React.Component {
     }
   }
 
-  // setPins() {
-  //   const pins = this.state.currentPins;
-  //   if (pins - this.state.selected >= 0) {
-  //     this.setState({
-  //       currentPins: pins - this.state.selected
-  //     });
-  //   }
-  // }
-
   render() {
     return (
       <>
+        <ScoreBoard frameScores={this.state.frameScores} roundholder={this.state.roundholder}
+          final={this.state.final} score={this.state.score} />
         <BowlingPins />
-        <div id="scoreBoard">
-          {this.state.roundholder.map(round => {
-            return (
-              <ScoreBoard scores={this.state.frameScores[round]} key={round} />
-            );
-          })}
-        </div>
         <TotalScore score={this.state.score} />
         <Keypad handleClick={this.handleClick} />
       </>
