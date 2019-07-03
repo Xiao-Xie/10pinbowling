@@ -8,19 +8,21 @@ const ScoreBoard = (props) => {
         <div className="rowheader">
           Round
         </div>
-        <div>
-          Throw 1
-        </div>
-        <div>
-          Throw 2
-        </div>
+        <div>Player</div>
       </div>
       <div className="scores column">
         {props.roundholder.map(round => {
           return <RoundScore scores={props.frameScores[round]} round={round} key={round} />
         })}
       </div>
-
+      <div className="column total">
+        <div className="rowheader">
+          Total
+        </div>
+        <div className={props.final ? "final" : "temp"}>
+          {props.score}
+        </div>
+      </div>
     </div>
   );
 }

@@ -9,32 +9,42 @@
 
 div {
   box-sizing: border-box;
+  font-family: 'Merriweather', serif;
 }
 
 #scoreBoard {
   display: block;
-  width: 1200px;
+  width: 80%
   border: 1px solid black;
 }
 
 .column {
   display: inline-block;
-  height: 200px;
+  height: 150px;
+  vertical-align: top
 }
 
-.scoreheader {
+.scoreheader, .total {
   width: 10%;
 }
 
+
+
+.total .final{
+  color:red
+}
+
 .scores {
-  width: 90%;
+  width: 80%;
 }
 
 .round {
   width: 10%;
   border-left: 1px solid black;
 }
-
+.total{
+  border-left: 1px solid black;
+}
 /* .column div {
   vertical-align: middle;
   text-align: center;
@@ -45,11 +55,13 @@ div {
   height: 30%;
   border: none;
   text-align: center;
+  font-size:25px;
+  padding-top:6px;
 }
 
 .scoreheader div,
-.score {
-  height: 35%;
+.score, .total div {
+  height: 70%;
   border-top: 1px solid black;
   text-align: center;
   font-size: 28px;
@@ -60,3 +72,34 @@ div {
   margin-left: auto;
   margin-right: auto;
 }
+
+  font-size: 28px
+}
+
+.total div{
+  padding-top:20px;
+  font-size:40px;
+  font-weight: 600
+}
+.scoreheader div{
+  padding-top:35px;
+  font-size:20px;
+  font-weight: 600
+}
+
+.roundscore{
+  display:indline-block;
+  border:solid black 1px;
+  border-top:none;
+  border-right:none;
+  width:30px;
+  height:30px;
+  font-size:20px;
+  float:right;
+}
+
+.roundcontainer, .roundtotal{
+  display:block;
+  height: 50%
+}
+

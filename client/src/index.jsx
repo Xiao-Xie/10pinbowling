@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ScoreBoard from './components/ScoreBoard.jsx';
 import Keypad from './components/Keypad.jsx';
-import TotalScore from './components/TotalScore.jsx';
+// import TotalScore from './components/TotalScore.jsx';
 import BowlingPins from './components/BowlingPins.jsx';
 
 class App extends React.Component {
@@ -70,7 +70,7 @@ class App extends React.Component {
   }
 
   setSelected(number) {
-    if (number <= this.state.currentPins) {
+    if (number <= this.state.currentPins && this.state.final === false) {
       this.setScore(number);
       this.setState(
         {
@@ -91,6 +91,12 @@ class App extends React.Component {
       this.state.throw === 2 ||
       (this.state.throw === 1 && this.state.selected === '10')
     ) {
+      //check for last throw
+      if (this.state.round === 10 && (this.state.throw === 2 || this.state.selected === '10')) {
+        this.setState({
+          final: true
+        })
+      }
       this.setState({
         round: this.state.round + 1,
         throw: 1,
@@ -111,7 +117,7 @@ class App extends React.Component {
         <ScoreBoard frameScores={this.state.frameScores} roundholder={this.state.roundholder}
           final={this.state.final} score={this.state.score} />
         <BowlingPins />
-        <TotalScore score={this.state.score} />
+        {/* <TotalScore score={this.state.score} /> */}
         <Keypad handleClick={this.handleClick} />
       </>
     );
