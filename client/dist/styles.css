@@ -14,7 +14,7 @@ div {
 #scoreBoard {
   display: block;
   width: 1200px;
-  border: 1px solid black
+  border: 1px solid black;
 }
 
 .column {
@@ -52,5 +52,11 @@ div {
   height: 35%;
   border-top: 1px solid black;
   text-align: center;
-  font-size: 28px
+  font-size: 28px;
+}
+
+.pins {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
