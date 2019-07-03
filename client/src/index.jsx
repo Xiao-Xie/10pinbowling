@@ -115,8 +115,12 @@ class App extends React.Component {
   render() {
     return (
       <>
+        <div id="scoreBoard">
+          {this.state.roundholder.map(round => {
+            return <ScoreBoard scores={this.state.frameScores[round]} key={round} />
+          })}
+        </div>
         <TotalScore score={this.state.score} />
-        {/* <ScoreBoard scores={this.state.frameScores} /> */}
         <Keypad handleClick={this.handleClick} />
       </>
     );

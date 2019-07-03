@@ -2,8 +2,8 @@
 import React from 'react';
 import KeypadRow from './KeypadRow';
 
-const Keypad = (props) => {
-  const keys = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [0, 0, 10]];
+const Keypad = props => {
+  const keys = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9, 10]];
   return (
     <div id="keypad">
       {keys.map((row, index) => (

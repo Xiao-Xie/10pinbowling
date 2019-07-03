@@ -6,6 +6,7 @@ const KeypadRow = ({ row, handleClick }) => (
   <div className="keypad_row">
     {row.map((key, index) => (
       <button
+        style={{ height: '50px', width: '50px' }}
         type="button"
         key={index}
         value={key}
