@@ -1,25 +1,28 @@
 import React from 'react';
+import RoundScore from './RoundScore'
 
-class ScoreBoard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    console.log(this.props.scores)
-    //const { scores } = this.props;
-    return (
-      <div className="round">
-        <div className="score">
-          {this.props.scores[0]}
+const ScoreBoard = (props) => {
+  return (
+    <div id="scoreBoard">
+      <div className="scoreheader column">
+        <div className="rowheader">
+          Round
         </div>
-        <div className="score">
-          {this.props.scores[1]}
+        <div>
+          Throw 1
         </div>
-
+        <div>
+          Throw 2
+        </div>
       </div>
-    );
-  }
+      <div className="scores column">
+        {props.roundholder.map(round => {
+          return <RoundScore scores={props.frameScores[round]} round={round} key={round} />
+        })}
+      </div>
+
+    </div>
+  );
 }
 
 export default ScoreBoard;
