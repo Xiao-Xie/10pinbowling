@@ -99,8 +99,11 @@ class App extends React.Component {
   render() {
     return (
       <>
-
-        {/* <ScoreBoard scores={this.state.frameScores} /> */}
+        <div id="scoreBoard">
+          {this.state.roundholder.map(round => {
+            return <ScoreBoard scores={this.state.frameScores[round]} key={round} />
+          })}
+        </div>
         <Keypad handleClick={this.handleClick} />
       </>
     );

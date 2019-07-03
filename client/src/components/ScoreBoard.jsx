@@ -6,17 +6,18 @@ class ScoreBoard extends React.Component {
     this.state = {};
   }
   render() {
-    const { scores } = this.props;
+    console.log(this.props.scores)
+    //const { scores } = this.props;
     return (
-      <table>
-        {scores.map(score => (
-          <>
-            <th>{scores.indexOf(score) + 1}</th>
-            <tr>{score["1"]}</tr>
-            <tr>{score["2"]}</tr>
-          </>
-        ))}
-      </table>
+      <div className="round">
+        <div className="score">
+          {this.props.scores[0]}
+        </div>
+        <div className="score">
+          {this.props.scores[1]}
+        </div>
+
+      </div>
     );
   }
 }
