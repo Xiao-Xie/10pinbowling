@@ -6,20 +6,21 @@ class RoundScore extends React.Component {
     this.state = {};
   }
   render() {
-    console.log(this.props.scores)
-    //const { scores } = this.props;
     return (
       <div className="round column">
         <div className="rowheader">
-          {this.props.round}
+          {this.props.round.substring(5)}
         </div>
         <div className="score">
-          {this.props.scores[0]}
-        </div>
-        <div className="score">
-          {this.props.scores[1]}
-        </div>
+          <div className="roundcontainer">
+            <div className="roundscore">{this.props.scores[0] === 10 ? "X" : this.props.scores[0]}</div>
+            <div className="roundscore">{this.props.scores[1] === 10 ? "X" : this.props.scores[0] !== 10 && this.props.scores[1] + this.props.scores[0] === 10 ? "/" : this.props.scores[1]}</div>
+          </div>
+          <div className="roundtotal">
+            {this.props.scores[2]}
+          </div>
 
+        </div>
       </div>
     );
   }
