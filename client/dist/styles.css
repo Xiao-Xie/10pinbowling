@@ -14,7 +14,7 @@ div {
 
 #scoreBoard {
   display: block;
-  width: 80%;
+  width: 80%
   border: 1px solid black;
 }
 
@@ -64,6 +64,15 @@ div {
   height: 70%;
   border-top: 1px solid black;
   text-align: center;
+  font-size: 28px;
+}
+
+.pins {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
   font-size: 28px
 }
 
@@ -89,10 +98,8 @@ div {
   float:right;
 }
 
-/* .roundcontainer{
-  text-align: right;
-} */
 .roundcontainer, .roundtotal{
   display:block;
   height: 50%
 }
+
