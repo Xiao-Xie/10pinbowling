@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import ScoreBoard from './components/ScoreBoard.jsx';
 import Keypad from './components/Keypad.jsx';
 import TotalScore from './components/TotalScore.jsx';
+import BowlingPins from './components/BowlingPins.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -104,19 +105,12 @@ class App extends React.Component {
     }
   }
 
-  // setPins() {
-  //   const pins = this.state.currentPins;
-  //   if (pins - this.state.selected >= 0) {
-  //     this.setState({
-  //       currentPins: pins - this.state.selected
-  //     });
-  //   }
-  // }
-
   render() {
     return (
       <>
-        <ScoreBoard frameScores={this.state.frameScores} roundholder={this.state.roundholder} />
+        <ScoreBoard frameScores={this.state.frameScores} roundholder={this.state.roundholder}
+          final={this.state.final} score={this.state.score} />
+        <BowlingPins />
         <TotalScore score={this.state.score} />
         <Keypad handleClick={this.handleClick} />
       </>
