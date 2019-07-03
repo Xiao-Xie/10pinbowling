@@ -11,9 +11,9 @@ class ScoreBoard extends React.Component {
       <table>
         {scores.map(score => (
           <>
-            <th>{scores.indexOf(score)}</th>
-            <tr>{score[0]}</tr>
-            <tr>{score[1]}</tr>
+            <th>{scores.indexOf(score) + 1}</th>
+            <tr>{score["1"]}</tr>
+            <tr>{score["2"]}</tr>
           </>
         ))}
       </table>
