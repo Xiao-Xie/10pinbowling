@@ -70,6 +70,9 @@ class App extends React.Component {
   }
 
   setSelected(number) {
+    if (number == "R") {
+      number = Math.floor(Math.random() * this.state.currentPins);
+    }
     if (number <= this.state.currentPins && this.state.final === false) {
       this.setScore(number);
       this.setState(
@@ -81,7 +84,7 @@ class App extends React.Component {
         }
       );
     } else {
-      console.log('invalid number:', number);
+      alert('invalid number:', number);
     }
   }
 
@@ -116,9 +119,11 @@ class App extends React.Component {
       <>
         <ScoreBoard frameScores={this.state.frameScores} roundholder={this.state.roundholder}
           final={this.state.final} score={this.state.score} />
-        <BowlingPins />
+        <div id="graphcontainer">
+          <BowlingPins selected={this.state.selected} />
+          <Keypad handleClick={this.handleClick} />
+        </div>
         {/* <TotalScore score={this.state.score} /> */}
-        <Keypad handleClick={this.handleClick} />
       </>
     );
   }

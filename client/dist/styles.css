@@ -6,6 +6,23 @@
   /* background: black; */
   mask-size: cover;
 }
+svg{
+
+  width:50px;
+  height:50px;
+}
+#firstrow{
+  margin-left:0;
+}
+#secondrow{
+  margin-left:25px;
+}
+#thirdrow{
+  margin-left:50px;
+}
+#lastrow{
+  margin-left:75px;
+}
 
 div {
   box-sizing: border-box;
@@ -14,8 +31,8 @@ div {
 
 #scoreBoard {
   display: block;
-  width: 80%
-  border: 1px solid black;
+  width: 100%;
+  /* border: 1px solid black; */
 }
 
 .column {
@@ -73,8 +90,7 @@ div {
   margin-right: auto;
 }
 
-  font-size: 28px
-}
+
 
 .total div{
   padding-top:20px;
@@ -103,3 +119,13 @@ div {
   height: 50%
 }
 
+#graphcontainer{
+  width:100%;
+  padding-top:50px;
+}
+
+#pinscontainer, #keypad{
+  display:inline-block;
+  width:300px;
+  vertical-align: top
+}
