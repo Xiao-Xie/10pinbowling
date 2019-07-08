@@ -1,0 +1,131 @@
+.icon-pin {
+  mask: url(https://image.flaticon.com/icons/svg/144/144781.svg);
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  /* background: black; */
+  mask-size: cover;
+}
+svg{
+
+  width:50px;
+  height:50px;
+}
+#firstrow{
+  margin-left:0;
+}
+#secondrow{
+  margin-left:25px;
+}
+#thirdrow{
+  margin-left:50px;
+}
+#lastrow{
+  margin-left:75px;
+}
+
+div {
+  box-sizing: border-box;
+  font-family: 'Merriweather', serif;
+}
+
+#scoreBoard {
+  display: block;
+  width: 100%;
+  /* border: 1px solid black; */
+}
+
+.column {
+  display: inline-block;
+  height: 150px;
+  vertical-align: top
+}
+
+.scoreheader, .total {
+  width: 10%;
+}
+
+
+
+.total .final{
+  color:red
+}
+
+.scores {
+  width: 80%;
+}
+
+.round {
+  width: 10%;
+  border-left: 1px solid black;
+}
+.total{
+  border-left: 1px solid black;
+}
+/* .column div {
+  vertical-align: middle;
+  text-align: center;
+  font-size: 28px
+} */
+
+.column .rowheader {
+  height: 30%;
+  border: none;
+  text-align: center;
+  font-size:25px;
+  padding-top:6px;
+}
+
+.scoreheader div,
+.score, .total div {
+  height: 70%;
+  border-top: 1px solid black;
+  text-align: center;
+  font-size: 28px;
+}
+
+.pins {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.total div{
+  padding-top:20px;
+  font-size:40px;
+  font-weight: 600
+}
+.scoreheader div{
+  padding-top:35px;
+  font-size:20px;
+  font-weight: 600
+}
+
+.roundscore{
+  display:indline-block;
+  border:solid black 1px;
+  border-top:none;
+  border-right:none;
+  width:30px;
+  height:30px;
+  font-size:20px;
+  float:right;
+}
+
+.roundcontainer, .roundtotal{
+  display:block;
+  height: 50%
+}
+
+#graphcontainer{
+  width:100%;
+  padding-top:50px;
+}
+
+#pinscontainer, #keypad{
+  display:inline-block;
+  width:300px;
+  vertical-align: top
+}

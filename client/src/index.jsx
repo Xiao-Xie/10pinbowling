@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ScoreBoard from './components/ScoreBoard.jsx';
 import Keypad from './components/Keypad.jsx';
+// import TotalScore from './components/TotalScore.jsx';
+import BowlingPins from './components/BowlingPins.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,104 +14,116 @@ class App extends React.Component {
       currentPins: 10,
       selected: 0,
       round: 1,
-      frameScore: [],
-      throw: 0,
-      frameScores: [],
+      throw: 1,
+      frameScore: [0, 0, 0],
+      frameScores: {
+        round1: [0, 0, 0],
+        round2: [0, 0, 0],
+        round3: [0, 0, 0],
+        round4: [0, 0, 0],
+        round5: [0, 0, 0],
+        round6: [0, 0, 0],
+        round7: [0, 0, 0],
+        round8: [0, 0, 0],
+        round9: [0, 0, 0],
+        round10: [0, 0, 0]
+      },
+      roundholder: [
+        'round1',
+        'round2',
+        'round3',
+        'round4',
+        'round5',
+        'round6',
+        'round7',
+        'round8',
+        'round9',
+        'round10'
+      ],
       final: false
     };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick(selectedNumber) {
-    if (this.state.currentPins > selectedNumber) {
-      let newScore = this.state.frameScore;
-      newScore.push(selectedNumber);
-      let newRound = this.state.round + 1;
-      let newPin = this.state.currentPins - selectedNumber;
-      let newThrow = this.state.throw + 1;
-      let newTotal = this.state.score + Number(selectedNumber);
-      this.setState(
-        {
-          selected: selectedNumber,
-          currentPins: newPin,
-          frameScore: newScore,
-          throw: newThrow,
-          score: newTotal,
-          frameScores: newFrameScores
-        },
-        () => {
-          console.log(this.state);
-        }
-      );
-      //when it is the 2nd throw of current round, increase round and reset other values
-      if (newThrow === 2) {
-        //reset state if it is not the last round
-
-        if (this.state.round < 10) {
-          let newFrameScores = [...this.state.frameScores, newScore];
-          this.setState({
-            throw: 0,
-            round: newRound,
-            frameScore: [],
-            currentPins: 10,
-            selected: null,
-            frameScores: newFrameScores
-          });
-        } else {
-          //display final scores
-          this.setState({
-            final: true
-          });
-        }
-      }
-    }
-    // if (selectedNumber - this.state.currentPins >= 0) {
-    //   setSelected(selectedNumber);
-    // }
+    this.setSelected(selectedNumber);
   }
 
-  // setSelected(number) {
-  //   this.setState({
-  //     selected: number
-  //   });
-  //   this.setRoundAndThrow();
-  //   this.setPins();
-  // }
+  setScore(number) {
+    console.log(this.state.throw);
+    console.log(this.state.frameScores);
+    var newframeScore = Object.assign({}, this.state.frameScore);
+    if (this.state.throw === 1) {
+      newframeScore[0] = Number(number);
+    } else {
+      newframeScore[1] = Number(number);
+    }
+    newframeScore[2] = Number(number) + this.state.score;
+    var newScore = Object.assign(this.state.frameScores);
+    var round = this.state.round;
+    newScore['round' + round] = newframeScore;
+    this.setState({
+      score: (this.state.score += Number(number)),
+      frameScores: newScore,
+      frameScore: newframeScore
+    });
+  }
 
-  // setRoundAndThrow() {
-  //   if (this.state.round === 2) {
-  //     this.setState({
-  //       round: 0,
-  //       throw: 0
-  //     });
-  //   } else {
-  //     this.setState({
-  //       round: this.state.round++,
-  //       throw: this.state.round++
-  //     });
-  //   }
-  // }
+  setSelected(number) {
+    if (number == "R") {
+      number = Math.floor(Math.random() * this.state.currentPins);
+    }
+    if (number <= this.state.currentPins && this.state.final === false) {
+      this.setScore(number);
+      this.setState(
+        {
+          selected: number
+        },
+        () => {
+          this.setRoundAndThrow();
+        }
+      );
+    } else {
+      alert('invalid number:', number);
+    }
+  }
 
-  // setPins() {
-  //   const pins = this.states.currentPins;
-  //   this.setState({
-  //     currentPins: pins - this.state.selected
-  //   });
-
-  //   this.setScore();
-  // }
-
-  // setScore() {
-  //   this.setState({
-  //     score: (this.state.score += this.state.selected)
-  //   });
-  // }
+  setRoundAndThrow() {
+    //after 2nd throw or if we hit all on 1st throw, move to next round
+    if (
+      this.state.throw === 2 ||
+      (this.state.throw === 1 && this.state.selected === '10')
+    ) {
+      //check for last throw
+      if (this.state.round === 10 && (this.state.throw === 2 || this.state.selected === '10')) {
+        this.setState({
+          final: true
+        })
+      }
+      this.setState({
+        round: this.state.round + 1,
+        throw: 1,
+        currentPins: 10,
+        frameScore: [0, 0]
+      });
+    } else {
+      this.setState({
+        throw: this.state.throw + 1,
+        currentPins: this.state.currentPins - this.state.selected
+      });
+    }
+  }
 
   render() {
     return (
       <>
-        <ScoreBoard scores={this.state.frameScores} />
-        <Keypad handleClick={this.handleClick} />
+        <ScoreBoard frameScores={this.state.frameScores} roundholder={this.state.roundholder}
+          final={this.state.final} score={this.state.score} />
+        <div id="graphcontainer">
+          <BowlingPins selected={this.state.selected} />
+          <Keypad handleClick={this.handleClick} />
+        </div>
+        {/* <TotalScore score={this.state.score} /> */}
       </>
     );
   }
